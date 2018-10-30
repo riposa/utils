@@ -10,11 +10,6 @@ import (
 )
 
 const (
-	seed = "0123456789abcdefghijklmnopqrstuvwxyz"
-
-	NeteaseAppKey    = "7ceb11438d399c096be71884b3aee8e9"
-	NeteaseAppSecret = "96506ddc03b6"
-	SmsTemplateID    = "3033646"
 
 	InterfaceSendSmsCode   = "https://api.netease.im/sms/sendcode.action"
 	InterfaceVerifySmsCode = "https://api.netease.im/sms/verifycode.action"
