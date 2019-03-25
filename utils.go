@@ -11,6 +11,7 @@ import (
 	"github.com/qiniu/api.v7/auth/qbox"
 	"github.com/qiniu/api.v7/storage"
 	"math"
+	"math/rand"
 	"strings"
 	"time"
 )
@@ -18,13 +19,12 @@ import (
 const (
 	earthRadius = 6378.137
 
-	accessKey = "76qiFFX8HiVBXIR21srmfVb8x-WRynY0HmOS31YQ"
-	secretKey = "5pwXYsvtKMna-Gf7uwtrqGtXT6CEmUlHV3gcDIHr"
+	accessKey = ""
+	secretKey = ""
 	bucket    = "testhengha"
 
 	getWxaCodeInterface = "https://api.weixin.qq.com/wxa/getwxacodeunlimit"
 )
-
 type TimeIt struct {
 	start time.Time
 	end   time.Time
@@ -297,4 +297,21 @@ func Substr(str string, start int, length int) string {
 	}
 
 	return string(rs[start:end])
+}
+
+func Bargain(target, current, remaining int, seed int64) (new int, over bool) {
+	var step = 80
+	if current-target <= 0 {
+		return -1, true
+	}
+	if remaining < 0 {
+		return -1, true
+	} else if remaining == 0 {
+		return current - target, true
+	}
+	rd := rand.New(rand.NewSource(seed))
+	standard := float64(current-target) / float64(remaining) / 2
+	param := 1 + float64(rd.Intn(step))/100.0
+	result := standard * param
+	return int(result), false
 }
